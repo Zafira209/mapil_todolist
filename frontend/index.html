@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff9f5" />
+    <meta name="description" content="A gentle space to plan your day with Daylist." />
+    <title>Daylist — Make room for your day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <main id="auth-view" class="auth-view" hidden>
+      <section class="auth-brand">
+        <a class="brand brand-light" href="#" aria-label="Daylist home"><span class="brand-mark">d</span><span>daylist</span></a>
+        <div class="auth-illustration" aria-hidden="true">
+          <div class="sun-shape"></div><div class="flower flower-one">✿</div><div class="flower flower-two">✿</div>
+          <div class="illustration-note"><span class="note-check">✓</span><span>one thing at a time</span></div>
+        </div>
+        <p class="auth-quote">“A little progress each day adds up to big results.”</p>
+        <span class="auth-credit">YOUR GENTLE DAILY COMPANION</span>
+      </section>
+      <section class="auth-panel">
+        <div class="auth-card">
+          <div class="auth-mobile-brand"><a class="brand" href="#"><span class="brand-mark">d</span><span>daylist</span></a></div>
+          <div class="auth-heading">
+            <p class="eyebrow" id="auth-eyebrow">WELCOME BACK</p>
+            <h1 id="auth-title">Good to see you<span class="pink-dot">.</span></h1>
+            <p id="auth-subtitle">Pick up where you left off.</p>
+          </div>
+          <div id="auth-message" class="notice" role="status" hidden></div>
+          <form id="auth-form" novalidate>
+            <label id="name-field" class="field" hidden>
+              <span>Your name</span><input name="name" type="text" autocomplete="name" maxlength="100" placeholder="Zafira" />
+            </label>
+            <label class="field">
+              <span>Email address</span><input name="email" type="email" autocomplete="email" maxlength="150" placeholder="you@example.com" required />
+            </label>
+            <label class="field">
+              <span>Password</span><input name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required />
+            </label>
+            <label id="confirm-field" class="field" hidden>
+              <span>Confirm password</span><input name="confirmPassword" type="password" autocomplete="new-password" placeholder="Type your password again" />
+            </label>
+            <button id="auth-submit" class="button button-primary auth-submit" type="submit">Log in <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="auth-switch"><span id="auth-switch-copy">New to Daylist?</span> <button id="auth-switch" type="button">Create an account</button></p>
+          <p class="auth-privacy">Your tasks are private and just for you.</p>
+        </div>
+      </section>
+    </main>
+
+    <div id="app-view" class="app-shell" hidden>
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Daylist dashboard"><span class="brand-mark">d</span><span>daylist</span></a>
+        <div class="sidebar-label">MENU</div>
+        <nav class="side-nav" aria-label="Task filters">
+          <button class="nav-item active" type="button" data-filter="all"><span class="nav-icon">▦</span>All tasks<span class="nav-count" id="nav-all">0</span></button>
+          <button class="nav-item" type="button" data-filter="today"><span class="nav-icon">◷</span>Today<span class="nav-count" id="nav-today">0</span></button>
+          <button class="nav-item" type="button" data-filter="upcoming"><span class="nav-icon">↗</span>Upcoming</button>
+          <button class="nav-item" type="button" data-filter="completed"><span class="nav-icon">✓</span>Completed</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-tip"><span class="tip-sparkle">✦</span><p>Small steps still move you forward.</p></div>
+          <div class="profile">
+            <div class="avatar" id="user-avatar">D</div><div class="profile-copy"><strong id="user-name">Daylist user</strong><span>Making today count</span></div>
+            <button id="logout-button" class="icon-button logout-button" type="button" aria-label="Log out" title="Log out">↪</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <a class="brand mobile-brand" href="#"><span class="brand-mark">d</span><span>daylist</span></a>
+          <div class="topbar-date"><span class="date-sun">☼</span><span id="today-date"></span></div>
+          <div class="topbar-actions"><label class="search-box"><span aria-hidden="true">⌕</span><input id="task-search" type="search" placeholder="Search tasks..." aria-label="Search tasks" /><kbd>⌘ K</kbd></label><button class="button button-primary add-task-button" type="button" data-open-task><span>＋</span> Add task</button></div>
+        </header>
+
+        <section class="welcome-row">
+          <div><p class="eyebrow">YOUR DAY, YOUR WAY</p><h1 id="greeting">Good morning<span class="pink-dot">.</span></h1><p class="welcome-subtitle">A little focus goes a long way. Let's make it count.</p></div>
+          <div class="welcome-flower" aria-hidden="true">✿</div>
+        </section>
+
+        <section class="stats-grid" aria-label="Task statistics">
+          <article class="stat-card stat-total"><div class="stat-top"><span class="stat-label">Total tasks</span><span class="stat-icon">▤</span></div><strong id="stat-total">0</strong><span class="stat-foot">tasks on your list</span></article>
+          <article class="stat-card stat-pending"><div class="stat-top"><span class="stat-label">In progress</span><span class="stat-icon">◷</span></div><strong id="stat-pending">0</strong><span class="stat-foot">still to do</span></article>
+          <article class="stat-card stat-completed"><div class="stat-top"><span class="stat-label">Completed</span><span class="stat-icon">✓</span></div><strong id="stat-completed">0</strong><span class="stat-foot">you've got this!</span></article>
+          <article class="progress-card"><div class="progress-heading"><div><span class="stat-label">Daily progress</span><strong id="progress-value">0%</strong></div><span class="progress-flower" aria-hidden="true">✿</span></div><div class="progress-track"><span id="progress-bar"></span></div><span class="stat-foot" id="progress-caption">Every little step counts.</span></article>
+        </section>
+
+        <section class="tasks-section">
+          <div class="section-heading"><div><p class="eyebrow">YOUR CHECKLIST</p><h2 id="task-list-title">All tasks <span id="visible-count" class="heading-count">0</span></h2></div><button class="button button-soft desktop-add" type="button" data-open-task>＋ New task</button></div>
+          <div id="loading-state" class="loading-state"><span class="spinner"></span>Gathering your tasks...</div>
+          <div id="task-list" class="task-list" aria-live="polite"></div>
+          <div id="empty-state" class="empty-state" hidden><div class="empty-flower">✿</div><h3 id="empty-title">A fresh start</h3><p id="empty-copy">Your list is clear. Add a task and make today yours.</p><button class="button button-primary" type="button" data-open-task>＋ Add your first task</button></div>
+          <div id="page-message" class="page-message" role="status" hidden></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="task-modal" class="modal-backdrop" hidden>
+      <section class="task-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-heading"><div><p class="eyebrow">MAKE A LITTLE PLAN</p><h2 id="modal-title">Add a task</h2></div><button id="modal-close" class="icon-button modal-close" type="button" aria-label="Close dialog">×</button></div>
+        <div id="task-form-message" class="notice" role="status" hidden></div>
+        <form id="task-form" novalidate>
+          <label class="field"><span>Task title</span><input name="title" type="text" maxlength="150" placeholder="What would you like to do?" required /></label>
+          <label class="field"><span>Description <small>Optional</small></span><textarea name="description" rows="3" maxlength="5000" placeholder="Add a few helpful details..."></textarea></label>
+          <div class="field-row">
+            <label class="field"><span>Category</span><select name="category"><option>School</option><option>Personal</option><option>Others</option></select></label>
+            <label class="field"><span>Priority</span><select name="priority"><option>Medium</option><option>Low</option><option>High</option></select></label>
+          </div>
+          <label class="field"><span>Due date <small>Optional</small></span><input name="due_date" type="date" /></label>
+          <div class="modal-actions"><button id="modal-cancel" class="button button-quiet" type="button">Cancel</button><button id="task-submit" class="button button-primary" type="submit">Save task <span aria-hidden="true">→</span></button></div>
+        </form>
+      </section>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
